@@ -7,10 +7,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import com.bumptech.glide.Glide;
 import com.example.yuwzhang.baking.R;
-import com.example.yuwzhang.baking.bean.Bake;
+import com.example.yuwzhang.baking.bean.StepsBean;
 import com.example.yuwzhang.baking.utils.ImageProvider;
 
 import java.util.ArrayList;
@@ -22,15 +21,15 @@ import java.util.List;
 
 public class StepListAdapter extends RecyclerView.Adapter<StepListAdapter.StepAdapterViewHolder> {
 
-    private List<Bake> mBakeList = new ArrayList<>();
+    private List<StepsBean> mStepsBeanList = new ArrayList<>();
     private Context mContext;
 
     // item callback
-    public OnStepListAdapterClickListener onStepListAdapterClickListener;
+    private OnStepListAdapterClickListener onStepListAdapterClickListener;
 
-    public StepListAdapter(List<Bake> data, Context context,
+    public StepListAdapter(List<StepsBean> data, Context context,
                            OnStepListAdapterClickListener onStepListAdapterClickListener) {
-        this.mBakeList = data;
+        this.mStepsBeanList = data;
         this.mContext = context;
         this.onStepListAdapterClickListener = onStepListAdapterClickListener;
     }
@@ -38,8 +37,7 @@ public class StepListAdapter extends RecyclerView.Adapter<StepListAdapter.StepAd
     @Override
     public StepAdapterViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
         if ( viewGroup instanceof RecyclerView ) {
-            int layoutId = -1;
-            layoutId = R.layout.list_item_step;
+            int layoutId = R.layout.list_item_step;
             View view = LayoutInflater.from(viewGroup.getContext()).inflate(layoutId, viewGroup, false);
             view.setFocusable(true);
             return new StepAdapterViewHolder(view);
@@ -58,8 +56,8 @@ public class StepListAdapter extends RecyclerView.Adapter<StepListAdapter.StepAd
 
     @Override
     public int getItemCount() {
-        if (this.mBakeList != null && this.mBakeList.size() != 0) {
-            return this.mBakeList.size();
+        if (this.mStepsBeanList != null && this.mStepsBeanList.size() != 0) {
+            return this.mStepsBeanList.size();
         } else {
             return 0;
         }
